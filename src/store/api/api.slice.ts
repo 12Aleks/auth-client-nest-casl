@@ -1,28 +1,17 @@
-import {
-    fetchBaseQuery,
-    buildCreateApi,
-    coreModule,
-    reactHooksModule,
-} from '@reduxjs/toolkit/query/react'
-import { HYDRATE } from 'next-redux-wrapper'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {IUser} from "../../types";
 
-const createApi = buildCreateApi(
-    coreModule(),
-    reactHooksModule({ unstable__sideEffectsInRender: true })
-)
+
 export const apiSlice = createApi({
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000'}),
-    tagTypes: ['USERS'],
-    extractRehydrationInfo(action, { reducerPath }) {
-        if (action.type === HYDRATE) {
-            return action.payload[reducerPath]
-        }
-    },
-    endpoints: builder => ({
-        getAllUsers: builder.query<IUser[], number>({
-            query: () => `/users`,
-            providesTags:  ['USERS']
+    reducerPath: "reviewApi",
+    baseQuery: fetchBaseQuery(
+        {baseUrl: 'http://localhost:5000/'}
+    ),
+    endpoints: (builder) => ({
+        getAllUsers: builder.query<IUser[], void>({
+            query: () => ({
+                url: 'users'
+            }),
         })
     })
 })
@@ -31,4 +20,3 @@ export const apiSlice = createApi({
 export const {
   useGetAllUsersQuery
 } = apiSlice;
-export const { getAllUsers } = apiSlice.endpoints;
