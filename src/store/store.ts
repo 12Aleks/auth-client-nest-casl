@@ -1,4 +1,4 @@
-import {configureStore, combineReducers, ThunkAction, Action} from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import { createWrapper } from "next-redux-wrapper";
 import usersSlice from "./slices/users.slice";
 import {apiSlice} from "./api/api.slice";
@@ -9,11 +9,14 @@ const rootReducer = combineReducers({
     [apiSlice.reducerPath]: apiSlice.reducer
 })
 
-export const store = configureStore({
+export const store = () => configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)
 })
 
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof store>;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];
+
+export const wrapper = createWrapper<AppStore>(store, { debug: true });
