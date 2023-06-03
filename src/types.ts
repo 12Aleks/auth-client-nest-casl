@@ -15,3 +15,14 @@ export interface IArticle{
     description: string
     comments: IComment[]
 }
+
+export interface IAuth{
+    isLoading: boolean,
+    error: string,
+    userToken: string
+}
+
+export interface ILogin{
+    email: string,
+    password: string
+}

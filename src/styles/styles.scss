@@ -1,0 +1,24 @@
+html, body{
+  min-height: 100vh;
+}
+
+body{
+  background: lightgrey;
+}
+
+.navbar, .main, .footer{
+  padding: 15px;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.main{
+  .auth{
+    height: calc(100vh - 200px);
+    .card_style{
+      max-width: 500px;
+      width: 100%;
+    }
+  }
+}
