@@ -16,12 +16,12 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // logout: (state) => {
-        //     localStorage.removeItem('token')
-        //     state.isLoading = false
-        //     state.userToken = ''
-        //     state.error = ''
-        // },
+        logout: (state) => {
+            localStorage.removeItem('token')
+            state.isLoading = false
+            state.userToken = ''
+            state.error = ''
+        },
         checkToken: (state, action: PayloadAction<string>) => {
             state.isLoading = false
             state.error = ''
@@ -45,5 +45,5 @@ const authSlice = createSlice({
 })
 
 
-export const { checkToken} = authSlice.actions
+export const { logout,checkToken} = authSlice.actions
 export default authSlice.reducer

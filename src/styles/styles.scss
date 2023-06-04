@@ -3,17 +3,21 @@ html, body{
 }
 
 body{
-  background: lightgrey;
+
 }
 
 .navbar, .main, .footer{
-  padding: 15px;
-  color: #fff;
   font-size: 16px;
   letter-spacing: 1px;
 }
 
 .main{
+  &.auth{
+    background: lightgrey;
+    .auth{
+      height: 100vh;
+    }
+  }
   .auth{
     height: calc(100vh - 200px);
     .card_style{
@@ -22,3 +26,4 @@ body{
     }
   }
 }
+

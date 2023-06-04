@@ -12,15 +12,17 @@ export const userLogin = createAsyncThunk(
             console.log('Auth action', data.access_token)
             localStorage.setItem('token', data.access_token)
             return data.access_token
-        } catch(e) {
-            return thunkAPI.rejectWithValue(`Error!!!`)
+        } catch(error) {
+            if(error instanceof Error){
+                return thunkAPI.rejectWithValue(error.message)
+            }
         }
     }
 )
 
 
 export const userSingUp = createAsyncThunk(
-    'user/login',
+    'user/sing',
     async (singUpData: ILogin, thunkAPI):Promise<string | any > => {
         try {
             const {data} = await axios.post(`${API_URL}auth/registration`, singUpData)
