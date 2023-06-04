@@ -1,5 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IAuth} from "../../types";
+import {userLogin} from "../actions/auth.action";
+
 
 
 
@@ -14,13 +16,34 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        logout: (state) => {
+        // logout: (state) => {
+        //     localStorage.removeItem('token')
+        //     state.isLoading = false
+        //     state.userToken = ''
+        //     state.error = ''
+        // },
+        checkToken: (state, action: PayloadAction<string>) => {
             state.isLoading = false
-            state.userToken = ''
             state.error = ''
+            state.userToken = action.payload
         }
     },
     extraReducers: {
-
+           [userLogin.fulfilled.type]: (state, action: PayloadAction<string>) => {
+               state.isLoading = false
+               state.error = ''
+               state.userToken = action.payload
+           },
+           [userLogin.pending.type]: (state) => {
+               state.isLoading = true;
+           },
+           [userLogin.rejected.type]: (state, action: PayloadAction<string>) => {
+               state.isLoading = false;
+               state.error = action.payload
+           }
     }
 })
+
+
+export const { checkToken} = authSlice.actions
+export default authSlice.reducer

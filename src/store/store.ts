@@ -2,10 +2,12 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import { createWrapper } from "next-redux-wrapper";
 import usersSlice from "./slices/users.slice";
 import {apiSlice} from "./api/api.slice";
+import authSlice from "./slices/auth.slice";
 
 
 const rootReducer = combineReducers({
     users: usersSlice,
+    auth: authSlice,
     [apiSlice.reducerPath]: apiSlice.reducer
 })
 

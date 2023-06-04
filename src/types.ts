@@ -19,7 +19,7 @@ export interface IArticle{
 export interface IAuth{
     isLoading: boolean,
     error: string,
-    userToken: string
+    userToken: string | null
 }
 
 export interface ILogin{

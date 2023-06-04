@@ -8,16 +8,18 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const apiSlice = createApi({
     baseQuery: fetchBaseQuery(
         {
-            baseUrl: `${API_URL}`
-            // prepareHeaders: (headers, { getState }) => {
-            //     const token = (getState() as RootState).auth.token;
-            //
-            //     if (token) {
-            //         headers.set('authorization', `Bearer ${token}`)
-            //     }
-            //
-            //     return headers
-            // }
+            baseUrl: `${API_URL}`,
+            prepareHeaders: (headers, { getState }) => {
+                const token = (getState() as RootState).auth.userToken;
+
+                console.log('API !!!!!!!!!!!!!!',token)
+
+                if (token) {
+                    headers.set('authorization', `Bearer ${token}`)
+                }
+
+                return headers
+            }
         },
     ),
     extractRehydrationInfo(action, {reducerPath}) {
