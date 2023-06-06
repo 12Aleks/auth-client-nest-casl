@@ -7,11 +7,12 @@ import Header from "./components/Header";
 
 interface ILayout {
     children: ReactNode,
-    title?: string
+    title?: string,
+    content: string
 }
 
 
-const MainLayout: FC<ILayout> = ({children, title}) => {
+const MainLayout: FC<ILayout> = ({children, title, content}) => {
     const dispatch = useApiDispatch()
 
     useEffect(() => {
@@ -23,6 +24,9 @@ const MainLayout: FC<ILayout> = ({children, title}) => {
         <>
             <Head>
                 <title>Autorization | {title}</title>
+                <meta content={content} name={title} />
+                <meta name="author" content="Leszek" />
+                <meta name="keywords" content="next, javascript, nest, auth" />
             </Head>
             {title !== 'auth' && <Header/>}
             <section className={'main ' + title}>

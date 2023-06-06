@@ -3,7 +3,8 @@ import { createWrapper } from "next-redux-wrapper";
 import usersSlice from "./slices/users.slice";
 import {apiSlice} from "./api/api.slice";
 import authSlice from "./slices/auth.slice";
-
+import {AnyAction} from 'redux'
+import { ThunkDispatch} from "redux-thunk/es/types";
 
 const rootReducer = combineReducers({
     users: usersSlice,
@@ -22,3 +23,4 @@ export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
 
 export const wrapper = createWrapper<AppStore>(store, { debug: true });
+export type NextThunkDispatch = ThunkDispatch<RootState, void, AnyAction>
