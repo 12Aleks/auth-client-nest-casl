@@ -44,3 +44,4 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
 };
 
 export default MainLayout;
+

@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
 import {Button, Card} from "react-bootstrap";
-import Router from "next/router";
+import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
+import {SerializedError} from "@reduxjs/toolkit";
 
 interface IError {
-    error: string,
+    error: any,
     returnFn?: () => void
 }
 

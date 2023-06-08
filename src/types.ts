@@ -11,6 +11,7 @@ export interface IComment{
     articleId: string | number
 }
 export interface IArticle{
+    _id: number
     title: string
     description: string
     comments: IComment[]

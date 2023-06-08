@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {HYDRATE} from "next-redux-wrapper";
 import type { RootState } from '../store'
-import {IUser} from "../../types";
+import {IArticle, IUser} from "../../types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,9 +10,7 @@ export const apiSlice = createApi({
         {
             baseUrl: `${API_URL}`,
             prepareHeaders: (headers, { getState }) => {
-                const token = (getState() as RootState).auth.userToken;
-
-                console.log('API !!!!!!!!!!!!!!',token)
+                const token:string|null = (getState() as RootState).auth.userToken;
 
                 if (token) {
                     headers.set('authorization', `Bearer ${token}`)
@@ -27,7 +25,7 @@ export const apiSlice = createApi({
             return action.payload[reducerPath];
         }
     },
-    tagTypes: ['User'],
+    tagTypes: ['User', 'Articles'],
     endpoints: (builder) => ({
         getAllUsers: builder.query<IUser[], void>({
             query: () => ({
@@ -35,16 +33,23 @@ export const apiSlice = createApi({
             }),
             providesTags: () => ['User']
         }),
+
+        getAllArticles: builder.query<IArticle[], void>({
+            query: () => ({
+                url: '/articles'
+            }),
+            providesTags: () => ['Articles']
+        })
     })
 })
 
 // Export hooks for usage in functional components
 export const {
-    useGetAllUsersQuery
+    useGetAllUsersQuery,
+    useGetAllArticlesQuery,
+    util: {getRunningQueriesThunk}
 } = apiSlice;
 
 
 // export endpoints for use in SSR
-export const {
-    getAllUsers
-} = apiSlice.endpoints;
+export const { getAllUsers,  getAllArticles } = apiSlice.endpoints;
