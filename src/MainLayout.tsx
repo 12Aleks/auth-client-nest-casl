@@ -23,7 +23,7 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
     return (
         <>
             <Head>
-                <title>Autorization | {title}</title>
+                <title>{title}</title>
                 <meta content={content} name={title} />
                 <meta name="author" content="Leszek" />
                 <meta name="keywords" content="next, javascript, nest, auth" />

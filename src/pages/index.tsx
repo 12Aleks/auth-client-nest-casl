@@ -8,7 +8,7 @@ const IndexPage: NextPage = () => {
     console.log(data)
 
     return (
-     <MainLayout title='auth' content={'Auth subpage'}>
+     <MainLayout title='Authorization | auth' content={'Auth subpage'}>
          <Col className="auth d-flex justify-content-center align-items-center">
              <FormAuth/>
          </Col>

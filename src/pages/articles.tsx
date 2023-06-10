@@ -15,10 +15,9 @@ const Articles = () => {
 
     if (error) return <Error error={error}/>
 
-    console.log(articles)
 
     return (
-        <MainLayout title='articles' content={'Articles subpage'}>
+        <MainLayout title='Authorization | articles' content={'Articles subpage'}>
             <h1 className='title'>Articles</h1>
             { articles && articles.map(article =>
                   <CardComponent key={article._id} payload={article}/>

@@ -28,16 +28,17 @@ export const apiSlice = createApi({
     tagTypes: ['User', 'Articles'],
     endpoints: (builder) => ({
         getAllUsers: builder.query<IUser[], void>({
-            query: () => ({
-                url: 'users'
-            }),
+            query: () => 'users',
             providesTags: () => ['User']
         }),
 
         getAllArticles: builder.query<IArticle[], void>({
-            query: () => ({
-                url: '/articles'
-            }),
+            query: () => '/articles',
+            providesTags: () => ['Articles']
+        }),
+
+        getSingleArticleByID: builder.query<IArticle, string>({
+            query: (id: string) => `/articles/${id}`,
             providesTags: () => ['Articles']
         })
     })
@@ -47,9 +48,10 @@ export const apiSlice = createApi({
 export const {
     useGetAllUsersQuery,
     useGetAllArticlesQuery,
+    useGetSingleArticleByIDQuery,
     util: {getRunningQueriesThunk}
 } = apiSlice;
 
 
 // export endpoints for use in SSR
-export const { getAllUsers,  getAllArticles } = apiSlice.endpoints;
+export const { getAllUsers,  getAllArticles, getSingleArticleByID } = apiSlice.endpoints;

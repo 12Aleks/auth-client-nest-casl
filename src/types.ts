@@ -6,6 +6,7 @@ export interface IUser{
 }
 
 export interface IComment{
+    _id: number|string
     username: string
     text: string
     articleId: string | number
