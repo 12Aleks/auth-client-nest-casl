@@ -1,4 +1,4 @@
-import {FC, ReactNode, useEffect} from 'react';
+import {FC, memo, ReactNode, useEffect} from 'react';
 import Head from "next/head";
 import {Container, Row} from "react-bootstrap";
 import {useApiDispatch, useApiSelector} from "./store/hoock";
@@ -28,7 +28,7 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
                 <meta name="author" content="Leszek" />
                 <meta name="keywords" content="next, javascript, nest, auth" />
             </Head>
-            {title !== 'auth' && <Header/>}
+            {title !== 'Authorization | auth' && <Header/>}
             <section className={'main ' + title}>
                 <Container >
                     <Row>
@@ -43,5 +43,5 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
     );
 };
 
-export default MainLayout;
+export default memo(MainLayout);
 

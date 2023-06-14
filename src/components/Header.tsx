@@ -19,11 +19,11 @@ const Header = () => {
         <>
             <Navbar bg="light" variant="light" className="navbar">
                 <Container>
-                    <Link href="/" className='text-decoration-none'>
+                    <Link href="/home" className='text-decoration-none'>
                         <Navbar.Brand className='fw-bold'>nextAuth</Navbar.Brand>
                     </Link>
                     <Nav className="justify-content-end">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/articles">Articles</Nav.Link>
                         <Nav.Link onClick={() => userLogout()}>Logout</Nav.Link>
                     </Nav>
