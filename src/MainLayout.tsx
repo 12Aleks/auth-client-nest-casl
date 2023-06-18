@@ -4,6 +4,8 @@ import {Container, Row} from "react-bootstrap";
 import {useApiDispatch, useApiSelector} from "./store/hoock";
 import {checkToken} from "./store/slices/auth.slice";
 import Header from "./components/Header";
+import {protectedRoute} from "./routing/protectedRoute";
+import {IUser} from "./types";
 
 interface ILayout {
     children: ReactNode,
@@ -28,8 +30,8 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
                 <meta name="author" content="Leszek" />
                 <meta name="keywords" content="next, javascript, nest, auth" />
             </Head>
-            {title !== 'Authorization | auth' && <Header/>}
-            <section className={'main ' + title}>
+            <Header/>
+            <section className='main'>
                 <Container >
                     <Row>
                         {children}
@@ -37,7 +39,6 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
                 </Container>
             </section>
             <div className="footer">
-
             </div>
         </>
     );

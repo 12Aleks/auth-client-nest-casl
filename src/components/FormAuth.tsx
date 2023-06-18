@@ -1,12 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {Card, Button, Form} from 'react-bootstrap';
 import {useForm, SubmitHandler} from "react-hook-form";
-import {useApiDispatch, useApiSelector} from "../store/hoock";
+import {useApiDispatch} from "../store/hoock";
 import {userLogin, userSingUp} from "../store/actions/auth.action";
-import Router from "next/router";
-import Error from "./Error";
-import Loading from "./Loading";
-import {logout} from "../store/slices/auth.slice";
 
 
 type Inputs = {
@@ -17,25 +13,10 @@ type Inputs = {
 
 const FormAuth = () => {
     const dispatch = useApiDispatch()
-    const {isLoading, error, userToken} = useApiSelector(state => state.auth)
     const {register, handleSubmit, watch, formState: {errors}} = useForm<Inputs>();
     const [singUp, setSingUp] = useState<boolean>(false)
-
-    useEffect(() => {
-        userToken && Router.push('/articles')
-    }, [userToken]);
-
-    if (isLoading) return <Loading/>
-
-    if (error) return <Error error={error} returnFn={returnFn}/>
-
     const onSubmit: SubmitHandler<Inputs> = data => {
         singUp ? dispatch(userSingUp(data)) : dispatch(userLogin(data));
-    }
-
-
-    function returnFn(): void {
-        dispatch(logout())
     }
 
     return (

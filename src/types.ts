@@ -11,6 +11,15 @@ export interface IComment{
     text: string
     articleId: string | number
 }
+
+export interface IToken{
+    username: string,
+    userRole: string,
+    id: string|number,
+    exp: number,
+    iat: number
+}
+
 export interface IArticle{
     _id: number
     title: string

@@ -30,9 +30,9 @@ const authSlice = createSlice({
     },
     extraReducers: {
            [userLogin.fulfilled.type]: (state, action: PayloadAction<string>) => {
+               state.userToken = action.payload
                state.isLoading = false
                state.error = ''
-               state.userToken = action.payload
            },
            [userLogin.pending.type]: (state) => {
                state.isLoading = true;
