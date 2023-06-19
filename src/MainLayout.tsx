@@ -4,7 +4,7 @@ import {Container, Row} from "react-bootstrap";
 import {useApiDispatch, useApiSelector} from "./store/hoock";
 import {checkToken} from "./store/slices/auth.slice";
 import Header from "./components/Header";
-import {protectedRoute} from "./routing/protectedRoute";
+import {decoding} from "./routing/decoding";
 import {IUser} from "./types";
 
 interface ILayout {
@@ -20,6 +20,7 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
     useEffect(() => {
         const token = localStorage.getItem('token')
         token && dispatch(checkToken(token))
+
     }, [])
 
     return (
