@@ -8,7 +8,7 @@ import {logout} from "../store/slices/auth.slice";
 import {useRouter} from "next/router";
 import {decoding} from "../routing/decoding";
 import {IUser} from "../types";
-import {authRout, LOGIN_ROUTE} from "../routing/paths";
+import {usersRout, adminRout, LOGIN_ROUTE} from "../routing/paths";
 
 const Header = () => {
     const dispatch = useApiDispatch()
@@ -35,8 +35,13 @@ const Header = () => {
                     </Link>
                     <Nav className="justify-content-end">
                         {
-                            user?.role && authRout.map(link =>
-                                <Nav.Link href={link.path}>{link.component}</Nav.Link>
+                            user?.role && usersRout.map(link =>
+                                <Nav.Link key={link.component} href={link.path}>{link.component}</Nav.Link>
+                            )
+                        }
+                        {
+                            (user?.role == 'admin' || user?.role == 'editor') && adminRout.map(link =>
+                                <Nav.Link key={link.component} href={link.path}>{link.component}</Nav.Link>
                             )
                         }
                         <Nav.Link onClick={() => userLogout()}>Logout</Nav.Link>
