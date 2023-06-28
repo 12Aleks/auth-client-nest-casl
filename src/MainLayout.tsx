@@ -19,15 +19,10 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
     const dispatch = useApiDispatch()
     const router = useRouter()
 
-    console.log()
-
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
             dispatch(checkToken(token))
-            const data = decoding(token)
-            !data?.role ? router.push(LOGIN_ROUTE) :
-                (router.pathname == ADMIN_ROUTE && data?.role != 'admin' || data?.role != 'editor') ? router.push(HOME_ROUTE) : ''
         } else {
             router.push(LOGIN_ROUTE)
         }
