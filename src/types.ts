@@ -37,3 +37,18 @@ export interface ILogin{
     email: string,
     password: string
 }
+
+type TSource = {
+    id: null,
+    name: string
+}
+export interface INews{
+    source: TSource,
+    author: string,
+    title: string,
+    description: string,
+    url: string
+    urlToImage: string,
+    publishedAt: string,
+    content: string
+}

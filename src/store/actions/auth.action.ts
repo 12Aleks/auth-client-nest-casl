@@ -9,7 +9,6 @@ export const userLogin = createAsyncThunk(
     async (authData: ILogin, thunkAPI):Promise<string | any > => {
         try {
             const {data} = await axios.post(`${API_URL}auth/login`, authData)
-            console.log('Auth action', data.access_token)
             localStorage.setItem('token', data.access_token)
             return data.access_token
         } catch(error) {
