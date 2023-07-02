@@ -1,13 +1,14 @@
 import React from 'react';
 import MainLayout from "../../MainLayout";
-
 import {wrapper} from "../../store/store";
 import {getRunningQueriesThunk, getSingleArticleByID, useGetSingleArticleByIDQuery} from "../../store/api/api.slice";
 import {useRouter} from "next/router";
 import {skipToken} from "@reduxjs/toolkit/query";
-import Loading from "../../components/Loading";
-import Error from "../../components/Error";
 import {Button, Card, Col, Row} from "react-bootstrap";
+import dynamic from "next/dynamic";
+
+const Loading = dynamic(() => import('../../components/Loading'))
+const Error = dynamic(() => import('../../components/Error'))
 
 const Article = () => {
     const router = useRouter();
@@ -17,10 +18,7 @@ const Article = () => {
     )
 
     if (isLoading) return <Loading/>
-
     if (error) return <Error error={error}/>
-
-    console.log(article)
 
     return (
         <MainLayout title='Authorization | article' content='Single article'>

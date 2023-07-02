@@ -1,13 +1,11 @@
 import {FC, memo, ReactNode, useEffect} from 'react';
 import Head from "next/head";
 import {Container, Row} from "react-bootstrap";
-import {useApiDispatch, useApiSelector} from "./store/hoock";
+import {useApiDispatch} from "./store/hoock";
 import {checkToken} from "./store/slices/auth.slice";
 import Header from "./components/Header";
-import {decoding} from "./routing/decoding";
-import {IUser} from "./types";
 import {useRouter} from "next/router";
-import {ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE} from "./routing/paths";
+import { LOGIN_ROUTE} from "./routing/paths";
 
 interface ILayout {
     children: ReactNode,

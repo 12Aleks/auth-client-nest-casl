@@ -46,3 +46,42 @@ div[role='status'].spinner-border.text-primary{
   width: 75px;
   height: 75px;
 }
+
+.article, .news{
+   //width: 18rem;
+   margin: 0 auto 10px;
+   min-height: 450px;
+}
+.news{
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .card-text, .card-title{
+    letter-spacing: 1px;
+    word-break: break-all;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-title{
+    -webkit-line-clamp: 3;
+    height: 72px;
+  }
+  .card-text{
+    -webkit-line-clamp: 5;
+    height: 135px;
+  }
+  button{
+    margin-top: auto;
+
+  }
+}
+
+
+
+
