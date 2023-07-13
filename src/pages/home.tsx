@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import MainLayout from "../MainLayout";
 import {NextThunkDispatch, wrapper} from "../store/store";
 import {GetServerSideProps} from "next";
@@ -8,13 +8,26 @@ import {useApiSelector} from "../store/hoock";
 import CardComponent from "../components/CardComponent";
 import {Col, Row} from "react-bootstrap";
 import Image from 'next/image'
+import Paginations from "../components/Paginations";
 
 const Loading = dynamic(() => import('../components/Loading'))
 const Error = dynamic(() => import('../components/Error'))
 
+const ROWS_PER_PAGE = 10;
+
+const getTotalPageCount = (rowCount: number): number =>
+    Math.ceil(rowCount / ROWS_PER_PAGE);
+
+
 const Home = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const lastPage = 3;
+    const [page, setPage] = useState<number>(1);
     const {news, isLoading, error} = useApiSelector(state => state.news);
-    console.log(news)
+
+
+
+
     if (isLoading) return <Loading/>
     if (error) return <Error error={error}/>
 
@@ -24,7 +37,7 @@ const Home = () => {
              <h1 className='title'>nextAuth news</h1>
 
             <Col xs={12} md={8} lg={9} className="float-left pb-3 pb-md-5 pb-lg-5">
-                <div style={{ position: 'relative', height: '600px' }}>
+                <div style={{ position: 'relative', height: '600px', marginBottom: '10px' }}>
                     <Image
                         alt={news[0].title}
                         src={news[0].urlToImage}
@@ -36,7 +49,7 @@ const Home = () => {
                     />
                 </div>
 
-                <h2 >{news[0].title}</h2>
+                <h2 className="news-main-title">{news[0].title}</h2>
 
             </Col>
             <Col xs={12} md={4} lg={3} className="float-left pb-3 pb-md-5 pb-lg-5">
@@ -77,6 +90,15 @@ const Home = () => {
                   <CardComponent key={el.title} payload={el} classComponent='news' />
                 )
             }
+
+            {news && (
+                <Paginations
+                    // currentPage={currentPage}
+                    // lastPage={lastPage}
+                    // maxLength={7}
+                    // setCurrentPage={setCurrentPage}
+                />
+            )}
         </MainLayout>
     );
 };

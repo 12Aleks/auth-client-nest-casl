@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {useRouter} from "next/router";
 import {Button, Card, Col} from 'react-bootstrap';
 import {IArticle, INews} from "../types";
+import DefaultImage from '../../public/default.png'
 
 interface ICardComponent {
     payload: IArticle | INews,
@@ -15,7 +16,7 @@ const CardComponent: FC<ICardComponent> = ({payload, classComponent}) => {
         <Col sm={12} md={6} lg={3}>
             <Card className={classComponent}>
                 {
-                    "urlToImage" in payload && <Card.Img variant="top" src={payload.urlToImage}/>
+                    "urlToImage" in payload && payload.urlToImage && <Card.Img variant="top" src={payload.urlToImage}/>
                 }
                 <Card.Body>
                     <Card.Title>{payload.title}</Card.Title>

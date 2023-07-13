@@ -6,11 +6,11 @@ export const ADMIN_ROUTE = '/admin';
 export const usersRout = [
     {
         path: HOME_ROUTE,
-        component: 'Home'
+        component: 'World news'
     },
     {
         path: ARTICLES_ROUTE,
-        component: 'Articles'
+        component: 'Local news'
     }
 ]
 

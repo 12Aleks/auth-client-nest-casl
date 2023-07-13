@@ -10,7 +10,7 @@ const Admin = () => {
 
     useEffect(() => {
         const data = decoding()
-        router.pathname == ADMIN_ROUTE && data?.role && (data?.role != 'admin' || 'editor') && router.push(HOME_ROUTE)
+        router.pathname == ADMIN_ROUTE && data?.role && !['admin', 'editor'].includes(data?.role) && router.push(HOME_ROUTE)
     }, [])
 
     if(!loading) return <h1>Loading ....</h1>

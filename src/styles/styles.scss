@@ -13,6 +13,14 @@ body {
   letter-spacing: 1px;
 }
 
+.navbar{
+  svg{
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+}
+
 .main {
   &.auth {
     background: lightgrey;
@@ -51,6 +59,10 @@ div[role='status'].spinner-border.text-primary{
    //width: 18rem;
    margin: 0 auto 10px;
    min-height: 450px;
+}
+
+.news-main-title{
+
 }
 .news{
   padding: 0;
