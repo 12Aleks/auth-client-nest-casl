@@ -1,10 +1,9 @@
-import React from 'react';
 import MainLayout from "../../MainLayout";
 import {wrapper} from "../../store/store";
 import {getRunningQueriesThunk, getSingleArticleByID, useGetSingleArticleByIDQuery} from "../../store/api/api.slice";
 import {useRouter} from "next/router";
 import {skipToken} from "@reduxjs/toolkit/query";
-import {Button, Card, Col, Row} from "react-bootstrap";
+import {Card, Col, Row} from "react-bootstrap";
 import dynamic from "next/dynamic";
 
 const Loading = dynamic(() => import('../../components/Loading'))

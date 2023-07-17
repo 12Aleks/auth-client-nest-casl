@@ -20,8 +20,7 @@ const Home = () => {
     const [postsPerPage] = useState<number>(12);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const {news, isLoading, error} = useApiSelector(state => state.news);
-
-    const data = news.slice(3)
+    const data: INews[] = news?.slice(3)
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -29,72 +28,80 @@ const Home = () => {
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
 
-    if (isLoading) return <Loading/>
-    if (error) return <Error error={error}/>
-
     return (
         <MainLayout title="Authorization | main page" content='Main page'>
 
-            <h1 className='title'>nextAuth news</h1>
-
-            <Col xs={12} md={8} lg={9} className="float-left pb-3 pb-md-5 pb-lg-5">
-                <div style={{position: 'relative', height: '600px', marginBottom: '10px'}}>
-                    <Image
-                        alt={news[0].title}
-                        src={news[0].urlToImage}
-                        fill
-                        sizes="(min-width: 808px) 50vw, 100vw"
-                        style={{
-                            objectFit: 'cover',
-                        }}
-                    />
-                </div>
-
-                <h2 className="news-main-title">{news[0].title}</h2>
-
-            </Col>
-            <Col xs={12} md={4} lg={3} className="float-left pb-3 pb-md-5 pb-lg-5">
-                <div style={{position: 'relative', height: '320px'}}>
-                    <Image
-                        alt={news[1].title}
-                        src={news[1].urlToImage}
-                        fill
-                        sizes="(min-width: 808px) 50vw, 100vw"
-                        style={{
-                            objectFit: 'cover',
-                        }}
-                    />
-                </div>
-
-                <h5>{news[1].title}</h5>
-
-                <div style={{position: 'relative', height: '200px'}}>
-                    <Image
-                        alt={news[2].title}
-                        src={news[2].urlToImage}
-                        fill
-                        sizes="(min-width: 808px) 50vw, 100vw"
-                        style={{
-                            objectFit: 'cover',
-                        }}
-                    />
-                </div>
-
-                <h5>{news[2].title}</h5>
-            </Col>
-
-            <h3>Other actuality news</h3>
-            <hr/>
-
+            <h1 className='title'>World news</h1>
             {
-                currentNews && <News currentNews={currentNews}/>
+                isLoading ? <Loading/> :
+                error ? <Error error={error}/> :
+                data && (
+                    <>
+                        <Col xs={12} md={8} lg={9} className="float-left pb-3 pb-md-5 pb-lg-5">
+
+
+                            <div style={{position: 'relative', height: '600px', marginBottom: '10px'}}>
+                                <Image
+                                    alt={news[0].title}
+                                    src={news[0].urlToImage}
+                                    fill
+                                    sizes="(min-width: 808px) 50vw, 100vw"
+                                    style={{
+                                        objectFit: 'cover',
+                                    }}
+                                />
+                            </div>
+
+                            <h2 className="news-main-title">{news[0].title}</h2>
+
+                        </Col>
+                        <Col xs={12} md={4} lg={3} className="float-left pb-3 pb-md-5 pb-lg-5">
+                            <div style={{position: 'relative', height: '320px'}}>
+                                <Image
+                                    alt={news[1].title}
+                                    src={news[1].urlToImage}
+                                    fill
+                                    sizes="(min-width: 808px) 50vw, 100vw"
+                                    style={{
+                                        objectFit: 'cover',
+                                    }}
+                                />
+                            </div>
+
+                            <h5 className="news-main-sub-title">{news[1].title}</h5>
+
+                            <div style={{position: 'relative', height: '200px'}}>
+                                <Image
+                                    alt={news[2].title}
+                                    src={news[2].urlToImage}
+                                    fill
+                                    sizes="(min-width: 808px) 50vw, 100vw"
+                                    style={{
+                                        objectFit: 'cover',
+                                    }}
+                                />
+                            </div>
+
+                            <h5 className="news-main-sub-title">{news[2].title}</h5>
+                        </Col>
+
+                        <h3>Other actuality news</h3>
+                        <hr/>
+
+                        {
+                            currentNews && <News currentNews={currentNews}/>
+                        }
+
+                        {(data?.length > postsPerPage) && <Paginations
+                            newsPerPage={postsPerPage}
+                            totalNews={data.length}
+                            currentPage={currentPage}
+                            paginate={paginate}/>
+                        }
+                    </>
+                )
             }
 
-            {(news?.length > postsPerPage) && <Paginations
-                newsPerPage={postsPerPage}
-                totalNews={news.length}
-                paginate={paginate}/>
-            }
         </MainLayout>
     );
 };

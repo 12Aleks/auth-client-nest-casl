@@ -1,9 +1,6 @@
 import {memo} from 'react';
-import dynamic from "next/dynamic";
 import CardComponent from "./CardComponent";
 import {INews} from "../types";
-
-const Loader = dynamic(() => import('../components/Loading'))
 
 interface NewsProps {
     currentNews: INews[]
@@ -11,12 +8,10 @@ interface NewsProps {
 
 const News = ({currentNews}: NewsProps) => {
 
-    if(!currentNews) return <Loader/>
-
     return (
         <>
             {
-                currentNews.map((el) => <CardComponent key={el.title} payload={el} classComponent='news' />)
+                currentNews.map((el:INews, index: number) => <CardComponent key={el.title + index} payload={el} classComponent='news' />)
             }
         </>
     );

@@ -3,22 +3,23 @@ import Pagination from 'react-bootstrap/Pagination';
 interface IPaginationProps{
     newsPerPage: number,
     totalNews: number,
+    currentPage: number,
     paginate: (pageNumber: number) => void
 }
 
-const Paginations = ({ newsPerPage, totalNews, paginate } : IPaginationProps) => {
+const Paginations = ({ newsPerPage, totalNews, paginate, currentPage } : IPaginationProps) => {
     const pageNumbers: number[] = [];
 
     for (let i: number = 1; i <= Math.ceil(totalNews / newsPerPage); i++) {
         pageNumbers.push(i);
     }
 
-
+    console.log(currentPage)
     return (
         <nav className="mt-3 mb-5 d-flex justify-content-center">
-            <ul className='pagination '>
+            <ul className='pagination'>
                 {pageNumbers?.map(n => (
-                    <li key={n} className='page-item'>
+                    <li key={n} className={`page-item cursor-pointer ${currentPage === n && 'active'}`}>
                         <span onClick={() => paginate(n)} className='page-link'>
                             {n}
                         </span>
