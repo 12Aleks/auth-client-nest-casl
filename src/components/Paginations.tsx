@@ -14,7 +14,6 @@ const Paginations = ({ newsPerPage, totalNews, paginate, currentPage } : IPagina
         pageNumbers.push(i);
     }
 
-    console.log(currentPage)
     return (
         <nav className="mt-3 mb-5 d-flex justify-content-center">
             <ul className='pagination'>

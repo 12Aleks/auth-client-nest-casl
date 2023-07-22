@@ -27,7 +27,7 @@ const CardComponent: FC<ICardComponent> = ({payload, classComponent}) => {
                         {
                             "_id" in payload ?  <Button variant="primary" onClick={() => router.push( `/articles/` + payload._id)}>
                                 Read more
-                            </Button>: <Button>Read more</Button>
+                            </Button>: <Button variant="primary" onClick={() => router.push( `/news/` + payload.title.replace(/ /g, "_"))}>Read more</Button>
                         }
 
                     </div>
