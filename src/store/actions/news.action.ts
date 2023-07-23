@@ -8,7 +8,7 @@ export const getNews = createAsyncThunk(
     'news/thunk',
     async (_, thunkApi):Promise<INews[] | any > => {
         try {
-            const { data } = await axios.get(`https://newsapi.org/v2/everything?q=Apple&domains=lifehacker.com&sortBy=popularity&apiKey=${API_KEY}`)
+            const { data } = await axios.get(`https://newsapi.org/v2/everything?domains=lifehacker.com&sortBy=popularity&apiKey=${API_KEY}`)
             return data.articles
         } catch (error) {
             if(error instanceof Error){
