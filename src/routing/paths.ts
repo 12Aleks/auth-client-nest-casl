@@ -1,6 +1,6 @@
-export const LOGIN_ROUTE = '/';
+export const LOGIN_ROUTE = '/auth';
 export const ARTICLES_ROUTE = '/articles';
-export const HOME_ROUTE = '/home';
+export const HOME_ROUTE = '/';
 export const ADMIN_ROUTE = '/admin';
 
 export const usersRout = [

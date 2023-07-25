@@ -8,7 +8,7 @@ import {logout} from "../store/slices/auth.slice";
 import {useRouter} from "next/router";
 import {decoding} from "../routing/decoding";
 import {IUser} from "../types";
-import {usersRout, adminRout, LOGIN_ROUTE} from "../routing/paths";
+import {usersRout, adminRout, LOGIN_ROUTE, HOME_ROUTE} from "../routing/paths";
 
 const Header = () => {
     const dispatch = useApiDispatch()
@@ -23,6 +23,10 @@ const Header = () => {
 
     function userLogout(){
         dispatch(logout());
+        router.push(HOME_ROUTE)
+    }
+
+    function userLogin(){
         router.push(LOGIN_ROUTE)
     }
 
@@ -35,22 +39,27 @@ const Header = () => {
                     </Link>
                     <Nav className="justify-content-end">
                         {
-                            user?.role && usersRout.map(link =>
+                            usersRout.map(link =>
+                                <Nav.Link key={link.component} href={link.path}>{link.component}</Nav.Link>
+                             )
+                        }
+                        {
+                            ['admin', 'editor'].includes(user?.role as string) && adminRout.map(link =>
                                 <Nav.Link key={link.component} href={link.path}>{link.component}</Nav.Link>
                             )
                         }
                         {
-                            (user?.role == 'admin' || user?.role == 'editor') && adminRout.map(link =>
-                                <Nav.Link key={link.component} href={link.path}>{link.component}</Nav.Link>
-                            )
+                            user?.role ? <>
+                                <Nav.Link onClick={() => userLogout()}>Logout</Nav.Link>
+                                <Nav.Link className="d-flex align-items-center">| <b>Hello {user?.name}</b>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         className="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                    </svg>
+                                </Nav.Link>
+                            </>:<Nav.Link onClick={() => userLogin()}>| Login</Nav.Link>
+
                         }
-                        <Nav.Link onClick={() => userLogout()}>Logout</Nav.Link>
-                        <Nav.Link className="d-flex align-items-center">| <b>Hello {user?.name}</b>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 className="bi bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                            </svg>
-                        </Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

@@ -21,9 +21,10 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
         const token = localStorage.getItem('token')
         if (token) {
             dispatch(checkToken(token))
-        } else {
-            router.push(LOGIN_ROUTE)
         }
+        // else {
+        //     router.push(LOGIN_ROUTE)
+        // }
     }, [])
 
 
