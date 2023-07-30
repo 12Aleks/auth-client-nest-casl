@@ -1,11 +1,8 @@
 import type {NextPage} from 'next'
-import React, {useEffect, useState} from "react";
-import Head from "next/head";
+import  {useState} from "react";
 import {useRouter} from "next/router";
-import {Col, Container, Row} from "react-bootstrap";
-import FormAuth from "../components/FormAuth";
-import {useApiDispatch, useApiSelector} from "../store/hoock";
-import {logout} from "../store/slices/auth.slice";
+import {Col} from "react-bootstrap";
+import { useApiSelector} from "../store/hoock";
 import dynamic from "next/dynamic";
 import {INews} from "../types";
 import MainLayout from "../MainLayout";
@@ -15,6 +12,7 @@ import Paginations from "../components/Paginations";
 import {GetServerSideProps} from "next";
 import {NextThunkDispatch, wrapper} from "../store/store";
 import {getNews} from "../store/actions/news.action";
+import Styles from '../styles/banner.module.scss'
 
 const Loading = dynamic(() => import('../components/Loading'))
 const Error = dynamic(() => import("../components/Error"))
@@ -35,7 +33,7 @@ const IndexPage: NextPage = () => {
     return (
         <MainLayout title="Authorization | main page" content='Main page'>
 
-            <div className="wrapper"><h1 className='title text-white'>World news</h1></div>
+            <h1 className='title text-white'>World news</h1>
             {
                 isLoading ? <Loading/> :
                     error ? <Error error={error}/> :
@@ -43,7 +41,7 @@ const IndexPage: NextPage = () => {
                             <>
                                 <div className="banner_background"></div>
                                 <Col xs={12} md={8} lg={9} className="float-left pb-3 pb-md-5 pb-lg-5">
-                                    <div style={{position: 'relative', height: '600px', marginBottom: '10px', border: '4px solid white'}}>
+                                    <div style={{position: 'relative', height: '600px', marginBottom: '10px' }} >
                                         <Image
                                             alt={news[0].title}
                                             src={news[0].urlToImage}
@@ -52,6 +50,7 @@ const IndexPage: NextPage = () => {
                                             style={{
                                                 objectFit: 'cover',
                                             }}
+                                            className={Styles.first_img}
                                         />
                                     </div>
 
@@ -78,8 +77,9 @@ const IndexPage: NextPage = () => {
                                             fill
                                             sizes="(min-width: 808px) 50vw, 100vw"
                                             style={{
-                                                objectFit: 'cover',  border: '4px solid white'
+                                                objectFit: 'cover'
                                             }}
+                                            className={Styles.last_img}
                                         />
                                     </div>
                                     <h5 className="news-main-sub-title" onClick={() => router.push(`/news/` + news[2].title.replace(/ /g, "_"))}>{news[2].title}</h5>

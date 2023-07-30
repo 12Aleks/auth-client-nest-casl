@@ -1,9 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IAuth} from "../../types";
 import {userLogin} from "../actions/auth.action";
-
-
-
+import Cookies from "js-cookie";
 
 
 const initialState:IAuth = {
@@ -17,7 +15,8 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            localStorage.removeItem('token')
+            localStorage.removeItem('token');
+            Cookies.remove('currentUser');
             state.isLoading = false
             state.userToken = ''
             state.error = ''

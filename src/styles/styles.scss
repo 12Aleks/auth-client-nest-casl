@@ -13,13 +13,7 @@ body {
   letter-spacing: 1px;
 }
 
-.navbar {
-  svg {
-    border: 1px solid black;
-    border-radius: 50%;
-    margin-left: 10px;
-  }
-}
+
 
 .main {
   &.auth {
@@ -36,30 +30,6 @@ body {
     .card_style {
       max-width: 500px;
       width: 100%;
-    }
-  }
-  div.wrapper{
-    position: relative;
-    overflow: hidden;
-    &:before,  &:after {
-      content: '';
-      position: absolute;
-      width: 600px;
-      height: 20%;
-      transform: skewX(45deg);
-      transform-origin: 0;
-    }
-    &:before {
-      top: 0;
-      left: -6%;
-      background-color: rgba(#007bff, .9);
-      z-index: 8;
-    }
-    &:after {
-      top: 20%;
-      left: -4%;
-      background-color: rgba(#fff200, .9);
-      z-index: 7;
     }
   }
 

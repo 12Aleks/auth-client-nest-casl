@@ -9,6 +9,8 @@ import {useRouter} from "next/router";
 import {decoding} from "../routing/decoding";
 import {IUser} from "../types";
 import {usersRout, adminRout, LOGIN_ROUTE, HOME_ROUTE} from "../routing/paths";
+import Styles from '../styles/header.module.scss'
+import Cookies from "js-cookie";
 
 const Header = () => {
     const dispatch = useApiDispatch()
@@ -32,10 +34,10 @@ const Header = () => {
 
     return (
         <>
-            <Navbar bg="light" variant="light" className="navbar">
+            <Navbar bg="light" variant="light" className={Styles.navbar}>
                 <Container>
-                    <Link href="/home" className='text-decoration-none'>
-                        <Navbar.Brand className='fw-bold'>nextAuth</Navbar.Brand>
+                    <Link href="/" className='text-decoration-none'>
+                        <div className={Styles.wrapper}><Navbar.Brand className='fw-bold'>nextAuth</Navbar.Brand></div>
                     </Link>
                     <Nav className="justify-content-end">
                         {
