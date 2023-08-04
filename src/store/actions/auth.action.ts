@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 import {ILogin} from "../../types";
+import Cookies from "js-cookie";
 
 const API_URL =  process.env.NEXT_PUBLIC_API_URL;
 
@@ -9,7 +10,8 @@ export const userLogin = createAsyncThunk(
     async (authData: ILogin, thunkAPI):Promise<string | any > => {
         try {
             const {data} = await axios.post(`${API_URL}auth/login`, authData)
-            localStorage.setItem('token', data.access_token)
+            Cookies.set("token", JSON.stringify(data.access_token), {expires: 1});
+            // localStorage.setItem('token', data.access_token)
             return data.access_token
         } catch(error) {
             if(error instanceof Error){
@@ -25,10 +27,13 @@ export const userSingUp = createAsyncThunk(
     async (singUpData: ILogin, thunkAPI):Promise<string | any > => {
         try {
             const {data} = await axios.post(`${API_URL}auth/registration`, singUpData)
-            localStorage.setItem('token', data.access_token)
+            Cookies.set("token", JSON.stringify(data.access_token), {expires: 1});
+            // localStorage.setItem('token', data.access_token)
             return data.access_token
-        } catch(e) {
-            return thunkAPI.rejectWithValue(`Error!!!`)
+        } catch(error) {
+            if(error instanceof Error){
+                return thunkAPI.rejectWithValue(`Error during registration!!! ${error.message}`)
+            }
         }
     }
 )

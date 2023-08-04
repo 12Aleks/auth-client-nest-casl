@@ -15,8 +15,9 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            localStorage.removeItem('token');
-            Cookies.remove('currentUser');
+            // localStorage.removeItem('token');
+            Cookies.remove('token');
+            Cookies.remove('current_user');
             state.isLoading = false
             state.userToken = ''
             state.error = ''

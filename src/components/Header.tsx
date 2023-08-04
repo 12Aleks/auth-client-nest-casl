@@ -29,6 +29,7 @@ const Header = () => {
     }
 
     function userLogin(){
+        dispatch(logout());
         router.push(LOGIN_ROUTE)
     }
 

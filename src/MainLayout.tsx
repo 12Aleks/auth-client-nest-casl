@@ -6,6 +6,7 @@ import {checkToken} from "./store/slices/auth.slice";
 import Header from "./components/Header";
 import {useRouter} from "next/router";
 import { LOGIN_ROUTE} from "./routing/paths";
+import Cookies from "js-cookie";
 
 interface ILayout {
     children: ReactNode,
@@ -18,13 +19,9 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
     const router = useRouter()
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
-        if (token) {
-            dispatch(checkToken(token))
-        }
-        // else {
-        //     router.push(LOGIN_ROUTE)
-        // }
+        // const token = localStorage.getItem('token')
+        const token = Cookies.get('token')
+        token && dispatch(checkToken(token))
     }, [])
 
 

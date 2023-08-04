@@ -4,12 +4,14 @@ import Cookies from "js-cookie";
 
 
 
-export const decoding = (): Pick<IUser, "name" | "role"> | null => {
-    const token = localStorage.getItem('token')
+export const decoding = ():Pick<IUser, "name" | "role"> | null => {
+    // const token = localStorage.getItem('token')
+    const token = Cookies.get("token");
     if (token) {
-        const d: IToken = jwtDecode(token)
-        d && Cookies.set("currentUser", JSON.stringify({name: d.username, role: d.userRole}), {expires: 1});
-        return {name: d.username, role: d.userRole}
+        const data = jwtDecode(token)
+        const tokenType: IToken = <IToken>data
+        Cookies.set('current_user', JSON.stringify({name: tokenType.username, role: tokenType.userRole}), { expires: 1})
+        return {name: tokenType.username, role: tokenType.userRole}
     } else {
         return null
     }

@@ -20,3 +20,7 @@ export const adminRout = [
         component: 'Admin'
     }
 ]
+
+export const protectedRouters = [HOME_ROUTE, ADMIN_ROUTE, ARTICLES_ROUTE]
+export const protectedAdminRoutes = [ADMIN_ROUTE]
+
