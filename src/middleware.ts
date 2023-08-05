@@ -10,12 +10,12 @@ export function middleware(request: NextRequest){
     console.log('Current', currentUser)
 
 
-    if(protectedRouters.includes(request.nextUrl.pathname) && (!currentUser || Date.now() > JSON.parse(currentUser.value).expiredAt)){
+    if(protectedAdminRoutes.includes(request.nextUrl.pathname) && !currentUser ){
         return NextResponse.redirect(new URL(HOME_ROUTE , request.url))
     }
 
-    if (currentUser && protectedAdminRoutes.includes(request.nextUrl.pathname) && !["admin", "editor"].includes(JSON.parse(currentUser?.value).role)) {
-        return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
+    if (protectedAdminRoutes.includes(request.nextUrl.pathname) && currentUser && !["admin", "editor"].includes(JSON.parse(currentUser?.value).role)) {
+        return NextResponse.redirect(new URL(HOME_ROUTE, request.url))
     }
 
 }

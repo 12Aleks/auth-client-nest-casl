@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,7 +10,6 @@ import {decoding} from "../routing/decoding";
 import {IUser} from "../types";
 import {usersRout, adminRout, LOGIN_ROUTE, HOME_ROUTE} from "../routing/paths";
 import Styles from '../styles/header.module.scss'
-import Cookies from "js-cookie";
 
 const Header = () => {
     const dispatch = useApiDispatch()
@@ -33,6 +32,8 @@ const Header = () => {
         router.push(LOGIN_ROUTE)
     }
 
+
+    console.log(user?.role)
     return (
         <>
             <Navbar bg="light" variant="light" className={Styles.navbar}>
