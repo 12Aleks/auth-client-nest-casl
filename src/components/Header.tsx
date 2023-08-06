@@ -24,6 +24,7 @@ const Header = () => {
 
     function userLogout(){
         dispatch(logout());
+        setUser(null)
         router.push(HOME_ROUTE)
     }
 

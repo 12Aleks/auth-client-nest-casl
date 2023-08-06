@@ -1,0 +1,14 @@
+.panel_title{
+  text-transform: uppercase;
+  color: grey;
+  font: 400 18px/20px Calibri;
+}
+.menu{
+  font: 400 16px/20px Calibri;
+  color: rgba(0, 0, 0, 0.93);
+  padding-left: 10px;
+  cursor: pointer;
+  &:hover{
+    color: #02192f;
+  }
+}
