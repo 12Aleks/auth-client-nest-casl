@@ -25,6 +25,7 @@ export interface IArticle{
     title: string
     description: string
     comments: IComment[]
+    author: string
 }
 
 export interface IAuth{
