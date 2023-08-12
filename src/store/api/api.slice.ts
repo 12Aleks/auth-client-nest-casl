@@ -28,7 +28,7 @@ export const apiSlice = createApi({
     tagTypes: ['User', 'Articles'],
     endpoints: (builder) => ({
         getAllUsers: builder.query<IUser[], void>({
-            query: () => 'users',
+            query: () => '/users',
             providesTags: () => ['User']
         }),
 

@@ -5,7 +5,6 @@ import {useApiDispatch} from "./store/hoock";
 import {checkToken} from "./store/slices/auth.slice";
 import Header from "./components/Header";
 import {useRouter} from "next/router";
-import { LOGIN_ROUTE} from "./routing/paths";
 import Cookies from "js-cookie";
 
 interface ILayout {

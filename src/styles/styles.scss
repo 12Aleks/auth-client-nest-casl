@@ -184,6 +184,30 @@ h5.news-main-sub-title {
   }
 }
 
+.table{
+  font: 400 1rem/1rem Calibri;
+  thead th{
+    background-color: $blue;
+    color: #fff;
+    font-weight: 400;
+  }
+  tbody{
+    tr td:nth-last-child(1){
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        i{
+          &:first-child{
+            color: $blue;
+          }
+          &:last-child{
+            color: darkred;
+          }
+        }
+    }
+  }
+}
+
 
 
 

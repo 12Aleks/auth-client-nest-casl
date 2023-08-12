@@ -9,7 +9,7 @@ import { ThunkDispatch} from "redux-thunk/es/types";
 
 
 const rootReducer = combineReducers({
-    users: usersSlice,
+    // users: usersSlice,
     auth: authSlice,
     [newsSlice.name]: newsSlice.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer

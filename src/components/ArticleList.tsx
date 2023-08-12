@@ -13,10 +13,11 @@ const ArticleList = () => {
         <>
             <thead>
             <tr>
-                <th>#</th>
-                <th>Article title</th>
-                <th>Author</th>
-                <th>Username</th>
+                <th className="text-center">#</th>
+                <th className="text-center">Article title</th>
+                <th className="text-center">Author</th>
+                <th className="text-center">Сreation date</th>
+                <th className="text-center">Update/Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -27,10 +28,11 @@ const ArticleList = () => {
                             {
                                 articles?.map((article, index) =>
                                     <tr key={article._id}>
-                                        <td>{index + 1}</td>
+                                        <td className="text-center">{index + 1}</td>
                                         <td>{article.title}</td>
                                         <td>{article.author}</td>
                                         <td></td>
+                                        <td><i className="bi bi-pencil mr-auto"></i><i className="bi bi-trash ml-auto"></i></td>
                                     </tr>
                                 )
                             }
