@@ -7,9 +7,6 @@ import {protectedAdminRoutes, protectedRouters} from "./routing/paths";
 export function middleware(request: NextRequest){
     const currentUser = request.cookies.get("current_user") ;
 
-    console.log('Current', currentUser)
-
-
     if(protectedAdminRoutes.includes(request.nextUrl.pathname) && !currentUser ){
         return NextResponse.redirect(new URL(HOME_ROUTE , request.url))
     }

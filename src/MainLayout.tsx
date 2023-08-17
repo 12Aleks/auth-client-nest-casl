@@ -18,8 +18,10 @@ const MainLayout: FC<ILayout> = ({children, title, content}) => {
     const router = useRouter()
 
     useEffect(() => {
-        // const token = localStorage.getItem('token')
-        const token = Cookies.get('token')
+        const token = Cookies.get("token")
+
+        console.log('Mainpage', token)
+
         token && dispatch(checkToken(token))
     }, [])
 
