@@ -7,8 +7,6 @@ const Error = dynamic(() => import('../components/Error'))
 const Users = () => {
     const {data: users, error, isLoading} = useGetAllUsersQuery()
 
-    console.log(users)
-
     return (
         <>
             <thead>
@@ -22,20 +20,19 @@ const Users = () => {
             </thead>
             <tbody>
             {
-                // isLoading ? <Loading/> :
-                //     error ? <Error error={error}/> :
+                isLoading ? <Loading/> :
+                  error ? <Error error={error}/> :
                         <>
-                            {/*{*/}
-                            {/*    users?.map((user, index) =>*/}
-                            {/*        <tr key={user._id}>*/}
-                            {/*            <td className="text-center">{index + 1}</td>*/}
-                            {/*            <td>{user.name}</td>*/}
-                            {/*            <td>{user.email}</td>*/}
-                            {/*            <td>{user.role}</td>*/}
-                            {/*            <td><i className="bi bi-pencil mr-auto"></i><i className="bi bi-trash ml-auto"></i></td>*/}
-                            {/*        </tr>*/}
-                            {/*    )*/}
-                            {/*}*/}
+                            {
+                            users?.map((user, index) =>
+                            <tr key={user._id}>
+                            <td className="text-center">{index + 1}</td>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>{user.role}</td>
+                            <td><i className="bi bi-pencil mr-auto"></i><i className="bi bi-trash ml-auto"></i></td>
+                            </tr>)
+                            }
                         </>
             }
             </tbody>

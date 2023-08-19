@@ -6,7 +6,8 @@
 .menu{
   font: 400 16px/20px Calibri;
   color: rgba(0, 0, 0, 0.93);
-  padding-left: 10px;
+  padding:5px 0 5px 10px;
+  margin: 5px 0;
   cursor: pointer;
   &:hover{
     color: #02192f;

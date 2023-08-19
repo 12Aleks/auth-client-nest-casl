@@ -21,14 +21,17 @@ const Admin = () => {
     const [loading, onLoading] = useState<boolean>(false)
 
     useEffect(() => {
-        const data = decoding()
+        const data = decoding();
+
         if(!['admin', 'editor'].includes(data?.role as string) && router.pathname == ADMIN_ROUTE) {
             router.push(HOME_ROUTE)
         }
         onLoading(true)
     }, [])
 
-
+    function activeTab(value: string){
+        setActive(value)
+    }
 
     return (
         <MainLayout title='Authorization | admin' content='Admin subpage'>
@@ -36,25 +39,27 @@ const Admin = () => {
            
             <Col lg={3}>
                 <h3 className={Styles.panel_title} >Content</h3>
-                  <p className={Styles.menu} onClick={() => setActive('new')}><i className="bi bi-pen"></i> New Article</p>
-                  <p className={Styles.menu} onClick={() => setActive('articles')}><i className="bi bi-folder"></i> Articles</p>
-                  <p className={Styles.menu} onClick={() => setActive( 'comments')}><i className="bi bi-chat-square"></i> Comments</p>
-                  <p className={Styles.menu} onClick={() => setActive('media')}><i className="bi bi-card-image"></i> Media</p>
+                  <p className={ `${active.includes('new') && 'active'} ${Styles.menu}`} onClick={() => activeTab('new')}><i className="bi bi-pen"></i> New Article</p>
+                  <p className={`${active.includes('articles') && 'active'} ${Styles.menu}`} onClick={() => activeTab('articles')}><i className="bi bi-folder"></i> Articles</p>
+                  <p className={`${active.includes('comments') && 'active'} ${Styles.menu}`} onClick={() => activeTab( 'comments')}><i className="bi bi-chat-square"></i> Comments</p>
+                  <p className={`${active.includes('media') && 'active'} ${Styles.menu}`} onClick={() => activeTab('media')}><i className="bi bi-card-image"></i> Media</p>
                 <h3 className={Styles.panel_title}>Users</h3>
-                   <p className={Styles.menu} onClick={() => setActive('users')}><i className="bi bi-people"></i> Users</p>
+                   <p className={ `${active.includes('create user') && 'active'} ${Styles.menu}`} onClick={() => activeTab('create user')}><i className="bi bi-pen"></i> New User</p>
+                   <p className={`${active.includes('users') && 'active'} ${Styles.menu}`} onClick={() => activeTab('users')}><i className="bi bi-people"></i> Users</p>
             </Col>
             <Col lg={9}>
                 {   !loading? <Loading/>:
+                    active.includes('new') ? <NewArticle/>:
                     <Table striped bordered hover size="sm">
                         {
-                            active === 'articles'? <ArticleList/>:
-                                active === 'new' ? <NewArticle/>:
-                                    active === 'comments'? <Comments />:
-                                        active === 'media' ? <Media/>:
+                            active.includes('articles')? <ArticleList/>:
+                                    active.includes('comments')? <Comments />:
+                                        active.includes('media') ? <Media/>:
                                             <Users/>
                         }
                     </Table>
                 }
+
 
             </Col>
         </MainLayout>
